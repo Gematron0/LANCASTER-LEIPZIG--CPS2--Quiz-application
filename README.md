@@ -25,4 +25,4 @@ step 3
 
     <location to python.exe><location to the main.py file>
 
-    C:/Users/<HIDDEN>/AppData/Local/Microsoft/WindowsApps/python3.13.exe c:/Users/<HIDDEN>/Documents/GitHub/LANCASTER-LEIPZIG--CPS2--Quiz-application/quastions.py
+    C:/Users/<HIDDEN>/AppData/Local/Microsoft/WindowsApps/python3.13.exe c:/Users/<HIDDEN>/Documents/GitHub/LANCASTER-LEIPZIG--CPS2--Quiz-application/quastions.py 
