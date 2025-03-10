@@ -31,6 +31,7 @@ def save(Results: str, name: str):
     f.close()
     return
 
+import sys
 def read(UserInput) -> str:
     '''
     reads thrue a file and checks if the username of the file matches with the inputed user name
