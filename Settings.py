@@ -93,13 +93,13 @@ def QuizSelection() -> dict | int | int:
                 HistoryQuestions = False
                 Quiz = {}
                 for i in value.split(","):
-                    if i == "1":
+                    if i == "1" or i == " 1":
                         MathQuestions = True
                         Quiz = Quiz | quastions.mathQuastion().copy()
-                    elif i == "2":
+                    elif i == "2" or i == " 2":
                         ComputerSceinceQuestions = True
                         Quiz = Quiz | quastions.computerScienceQuastion().copy()
-                    elif i == "3":
+                    elif i == "3" or i == " 3":
                         HistoryQuestions = True
                         Quiz = Quiz | quastions.historyQuastion().copy()
                 returnQuiz = {i: Quiz[key] for i, key in enumerate(Quiz.keys(), 1)} # changes the keys to still be in order from 1 to n
