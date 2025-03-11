@@ -12,6 +12,8 @@ step 2:
     open the terminal located inside of the folder of this project
     install colorama via pip3
     the command shuld be "pip3 install colorama"
+    install inputimeout via pip3
+    the command shuld be "pip3 install inputimeout"
 
 step 3 
 (with IED):
