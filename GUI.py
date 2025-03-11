@@ -7,8 +7,30 @@ import os
 
 ### clears the concle for easey reading ###
 clearConsole = lambda: os.system('cls'
+    '''
+    clears the consol
+
+    peramiters
+    ----------
+        What version are you using (wondows, linux, ext)
+
+    return
+    ------
+    there is no return for this file
+
+    examples
+    --------
+    clearConsole()
+
+    '''
     if os.name in ('nt', 'dos') else 'clear')
 
+def error(messege):
+    clearConsole()
+    print(Fore.BLACK+Back.YELLOW+f"{messege}")
+    print(Fore.BLACK+Back.YELLOW+f"programm will go back in 3 seconds")
+    time.sleep(3)
+    clearConsole()
 ### inputs the UI to let the person input some numbers ###
 def InputUI(totInputsFrunt: int, TotInputsBack: int, Part: int):
     '''

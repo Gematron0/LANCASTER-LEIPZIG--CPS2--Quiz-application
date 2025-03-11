@@ -1,4 +1,5 @@
 import GenerateResults
+import GUI
 
 def save(Results: str, name: str):
     '''
@@ -56,12 +57,16 @@ def read(UserInput) -> str:
     '''
     CurrentLineNumber = 0
     resuts = []
-    with open("results.txt", "r") as f:
-        for line in f:
-            CurrentLineNumber += 1
-            if CurrentLineNumber % 2 != 0:
-                if UserInput.strip() == line.strip():
-                    resuts.append(line.strip())
+    try:
+        with open("results.txt", "r") as f:
+            for line in f:
+                CurrentLineNumber += 1
+                if CurrentLineNumber % 2 != 0:
+                    if UserInput.strip() == line.strip():
+                        resuts.append(line.strip())
+    except:
+        GUI.error("The file dose not exsist; becuase no tests were made")
+        pass
     return resuts
 
 def readWithQurry(UserInput: str, Qurrynumber: int) -> str:

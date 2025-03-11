@@ -68,13 +68,13 @@ def QuizSelection() -> dict | int | int:
             print(Fore.BLACK+ f"(3) History Questions")
         print("-----------------------------")
         if timechange == True:
-            print(Fore.GREEN+ f"(S) edit time in secongs; its currently set to {time}s")
+            print(Fore.GREEN+ f"(S) edit time in seconds (e.g., S 40); its currently set to {time}s")
         else:
-            print(Fore.BLACK+ f"(S) edit time in secongs; its currently set to {time}s")
+            print(Fore.BLACK+ f"(S) edit time in seconds (e.g., S 40); its currently set to {time}s")
         if quastionchange == True:
-            print(Fore.GREEN+ f"(N) number of questions that shuld be quized on; between 0 and {Quiz.__len__()}; it is currently set to {NumberOfQuestions} question(s)")
+            print(Fore.GREEN+ f"(N) number of questions that shuld be quized on (e.g., N 9); between 1 and {Quiz.__len__()}; it is currently set to {NumberOfQuestions} question(s)")
         else:
-            print(Fore.BLACK+ f"(N) number of questions that shuld be quized on; between 0 and {Quiz.__len__()}; it is currently set to {NumberOfQuestions} question(s)")
+            print(Fore.BLACK+ f"(N) number of questions that shuld be quized on (e.g., N 9); between 1 and {Quiz.__len__()}; it is currently set to {NumberOfQuestions} question(s)")
         print("-----------------------------")
         print("to exit the porgram type (EXIT), or 0")
         if returnQuiz.__len__() != 0 and int(NumberOfQuestions) >= 0 and int(NumberOfQuestions) <= Quiz.__len__() and time >= 0:
@@ -102,17 +102,23 @@ def QuizSelection() -> dict | int | int:
                     elif i == "3" or i == " 3":
                         HistoryQuestions = True
                         Quiz = Quiz | quastions.historyQuastion().copy()
+                    else:
+                        GUI.error(f"ERROR: input of 'Q' function was not readable; expected 1,2,3 recived: {i}; EXAMPLE Q 1,2")
                 returnQuiz = {i: Quiz[key] for i, key in enumerate(Quiz.keys(), 1)} # changes the keys to still be in order from 1 to n
             except:
+                GUI.error(f"ERROR: input of 'Q' function was not readable; EXAMPLE Q 1,2")
                 pass
 
-        if UserInput[0] == "N" or UserInput[0] == "n":
+        elif UserInput[0] == "N" or UserInput[0] == "n":
             value = UserInput[1:]
             try:
-                if int(value) >= 0 and int(value) <= Quiz.__len__():
+                if int(value) >= 1 and int(value) <= Quiz.__len__():
                     NumberOfQuestions = int(value)
                     quastionchange = True
+                else:
+                    GUI.error(f"ERROR: input of 'N' function was not revicing a valid input; expected number between 1 and {Quiz.__len__()}; recived {value}; EXAMPLE N 9")
             except:
+                GUI.error(f"ERROR: input of 'N' function was not readable; EXAMPLE N 9")
                 pass
 
         elif UserInput[0] == "S" or UserInput[0] == "s":
@@ -121,15 +127,20 @@ def QuizSelection() -> dict | int | int:
                 if int(value) >= 0:
                     time = int(value)
                     timechange = True
+                else:
+                    GUI.error(f"ERROR: input of 'S' function was not revicing a valid input; expected number above 0; recived {value}; EXAMPLE S 20")
             except:
                 pass
-        if UserInput == "EXIT" or UserInput == "0":
+                GUI.error(f"ERROR: input of 'S' function was not readable; EXAMPLE S 20")
+        elif UserInput == "EXIT" or UserInput == "0":
             GUI.clearConsole()
             sys.exit()
-        if UserInput == "NEXT" or UserInput == "1":
+        elif UserInput == "NEXT" or UserInput == "next" or UserInput == "1":
             GUI.clearConsole()
             if returnQuiz.__len__() != 0 and int(NumberOfQuestions) >= 0 and int(NumberOfQuestions) <= Quiz.__len__() and time >= 0:
                 return returnQuiz, NumberOfQuestions, time
+        else:
+            GUI.error(f"value {UserInput} is not recognised")
             
 def Selection() -> int:
     '''
@@ -214,7 +225,7 @@ def SaveSelection() -> int:
 def pastResultSelection(Results: str)-> int:
     GUI.clearConsole()
     if Results.__len__() == 0:
-        input("no results found; press enter to go back: ")
+        GUI.error("No results found")
         return 0
     while True:
         number = 0

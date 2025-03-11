@@ -3,8 +3,7 @@ import GenerateQuiz # this file generates the quiz
 import GenerateResults
 import Settings
 import FileHandeling
-
-import sys
+import GUI
 
 def main():
     while True:
