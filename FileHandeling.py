@@ -65,8 +65,9 @@ def read(UserInput) -> str:
                     if UserInput.strip() == line.strip():
                         resuts.append(line.strip())
     except:
-        GUI.error("The file dose not exsist; becuase no tests were made")
+        GUI.error("The file dose not exsist; becuase no tests were saved")
         pass
+        return "FILENOTFOUND"
     return resuts
 
 def readWithQurry(UserInput: str, Qurrynumber: int) -> str:

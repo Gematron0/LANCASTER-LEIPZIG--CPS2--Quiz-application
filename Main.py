@@ -15,12 +15,13 @@ def main():
         if UserChoice == 2:
             UserInput = input("what result name shuld be read: ")
             PossibleResults = FileHandeling.read(UserInput)
-            qurryNumber = Settings.pastResultSelection(PossibleResults)
-            try:
-                results = FileHandeling.readWithQurry(UserInput, qurryNumber)
-                GenerateResults.runResults(results, False)
-            except:
-                pass
+            if PossibleResults != "FILENOTFOUND":
+                qurryNumber = Settings.pastResultSelection(PossibleResults)
+                try:
+                    results = FileHandeling.readWithQurry(UserInput, qurryNumber)
+                    GenerateResults.runResults(results, False)
+                except:
+                    pass
 
 
 if __name__ == "__main__":
