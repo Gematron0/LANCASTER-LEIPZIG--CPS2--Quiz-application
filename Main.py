@@ -1,27 +1,24 @@
-# files
-import GenerateQuiz # this file generates the quiz
+# files; all file functions that the main fincition needs to work
+import GenerateQuiz
 import GenerateResults
 import Settings
 import FileHandeling
-import GUI
 
 def main():
-    while True:
+    while True: # indefent loop
         UserChoice = Settings.Selection()
-        if UserChoice == 1:
+        if UserChoice == 1: # the choce of makeing and compleating a quiz
             Quiz, NumberOfQuestions, time = Settings.QuizSelection()
             results = GenerateQuiz.runQuiz(Quiz, NumberOfQuestions, time)
             GenerateResults.runResults(results, True)
-        if UserChoice == 2:
+        if UserChoice == 2: # the choice of reading thrue a file and seeing past results
             UserInput = input("what result name shuld be read: ")
             PossibleResults = FileHandeling.read(UserInput)
-            if PossibleResults != "FILENOTFOUND":
+            if PossibleResults != "FILENOTFOUND": # checking if the file exsts
                 qurryNumber = Settings.pastResultSelection(PossibleResults)
-                try:
+                if qurryNumber != "NORESULTFOUND":
                     results = FileHandeling.readWithQurry(UserInput, qurryNumber)
                     GenerateResults.runResults(results, False)
-                except:
-                    pass
 
 
 if __name__ == "__main__":

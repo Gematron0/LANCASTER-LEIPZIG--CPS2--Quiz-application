@@ -29,7 +29,7 @@ def runResults(Results: str, AllowSave: bool):
 
     currect = 0
     wrong = 0
-    for t in Results:
+    for t in Results: # prints out the results of the code
         if t == "C":
             currect += 1
         elif t == "W" or t == "T":
@@ -38,7 +38,7 @@ def runResults(Results: str, AllowSave: bool):
     print(f"[{currect}/{wrong+currect}][{round((currect/(wrong+currect))*100, 2)}%]")
     if AllowSave == True:
         UserInput = Settings.SaveSelection()
-        if UserInput == 2:
+        if UserInput == 2: # saveing system
             name = input("input a name that this attempt shuld be saved unter: ")
             FileHandeling.save(Results,name)
         return
@@ -67,7 +67,7 @@ def rearray(input: str)-> str:
     ("C","W","T")
     '''
     Output = []
-    for char in input:
+    for char in input: # checks each char it saved under and converts it back to an array
         if char == "C":
             Output.append("C")
         elif char == "W":

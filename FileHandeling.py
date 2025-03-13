@@ -24,7 +24,7 @@ def save(Results: str, name: str):
 
     >>> save(("T","W","W"), Eli)
     '''
-    f = open("results.txt", "a")
+    f = open("results.txt", "a") # saveing the result
     f.write(name)
     f.write("\n")
     f.write(f"{Results}")
@@ -57,14 +57,14 @@ def read(UserInput) -> str:
     '''
     CurrentLineNumber = 0
     resuts = []
-    try:
+    try: # reading thrue the results and see if there is any input like the user input
         with open("results.txt", "r") as f:
             for line in f:
                 CurrentLineNumber += 1
                 if CurrentLineNumber % 2 != 0:
                     if UserInput.strip() == line.strip():
                         resuts.append(line.strip())
-    except:
+    except: # if the file dose not exsist
         GUI.error("The file dose not exsist; becuase no tests were saved")
         pass
         return "FILENOTFOUND"
@@ -97,16 +97,16 @@ def readWithQurry(UserInput: str, Qurrynumber: int) -> str:
     '''
     CurrentLineNumber = 0
     NumbersUntillQurryMet = 0
-    nextResult = False
-    with open("results.txt", "r") as f:
+    nextResult = False 
+    with open("results.txt", "r") as f: # reads thrue the file and checks if the qurry number is like the function numebr
         for line in f:
             CurrentLineNumber += 1
             if CurrentLineNumber % 2 != 0:
                 if UserInput.strip() == line.strip():
-                    NumbersUntillQurryMet += 1
+                    NumbersUntillQurryMet += 1 # adds one and sees if this is the result the user wanted to see
                     if Qurrynumber == NumbersUntillQurryMet:
                         nextResult = True
             elif nextResult == True:
-                print(line.strip())
+                print(line.strip()) # strips the spaces; and runs it thrue a function and convert it into an array
                 Output = GenerateResults.rearray(line.strip())
                 return Output       

@@ -5,7 +5,6 @@ from inputimeout import inputimeout
 import time
 import os
 
-### clears the concle for easey reading ###
 clearConsole = lambda: os.system('cls'
     '''
     clears the consol
@@ -23,15 +22,15 @@ clearConsole = lambda: os.system('cls'
     clearConsole()
 
     '''
-    if os.name in ('nt', 'dos') else 'clear')
+    if os.name in ('nt', 'dos') else 'clear') # clears the consul
 
 def error(messege):
     clearConsole()
-    print(Fore.BLACK+Back.YELLOW+f"{messege}")
+    print(Fore.BLACK+Back.YELLOW+f"{messege}") # prints out the error messege; usualy the user put an incurrect value
     print(Fore.BLACK+Back.YELLOW+f"programm will go back in 3 seconds")
     time.sleep(3)
     clearConsole()
-### inputs the UI to let the person input some numbers ###
+
 def InputUI(totInputsFrunt: int, TotInputsBack: int, Part: int):
     '''
     this dose ui stuff
@@ -61,7 +60,7 @@ def InputUI(totInputsFrunt: int, TotInputsBack: int, Part: int):
 
     '''
     i = 0
-    if Part == 1:
+    if Part == 1: # the ui befor a question gets asked
         while i != totInputsFrunt - 1:
             i = i + 1
             print (Fore.BLACK+">",i,Fore.BLACK+"-------------------------------")
@@ -69,7 +68,7 @@ def InputUI(totInputsFrunt: int, TotInputsBack: int, Part: int):
         i = 0
         return
     
-    if Part == 2:
+    if Part == 2: # the ui after a question is asked
         i = totInputsFrunt
         while i != TotInputsBack:
             i = i + 1
@@ -108,16 +107,16 @@ def input(RemainingTime: int, PssibleValues: str) -> str | int:
     
     '''
     print (Fore.BLUE+"=========================")
-    start = time.time()
+    start = time.time() # set the time
     try: 
         print(f"you have {int(RemainingTime.__round__(0))}s remaining")
-        Answer = inputimeout(prompt='input: ', timeout=RemainingTime)
+        Answer = inputimeout(prompt='input: ', timeout=RemainingTime) # adding a timeout with the remaning ammout of time
+        end = time.time() # getting the end time
         Answer = Answer.upper()
-        end = time.time()
-        timeTaken = end-start
+        timeTaken = end-start # calculating the remaining time for the quiz
         RemainingTime = RemainingTime - timeTaken
 
-        if Answer == "1":
+        if Answer == "1": # convering intergers to there althebetical corispondent
             Answer = "A"
         if Answer == "2":
             Answer = "B"
@@ -126,7 +125,7 @@ def input(RemainingTime: int, PssibleValues: str) -> str | int:
         if Answer == "4":
             Answer = "D"
 
-        IsAResult = False
+        IsAResult = False # checking if the result is an A B C or D; else resting the question
         for i in PssibleValues:
             if i == Answer:
                 IsAResult = True
@@ -135,8 +134,8 @@ def input(RemainingTime: int, PssibleValues: str) -> str | int:
         else:
             return "WRONG", RemainingTime
 
-    except Exception:
-        print("time has ended")
+    except Exception: # the time ran out so it would just send the user to the results
+        error(f"Time has endded")
         RemainingTime = 0
         return "TIME", RemainingTime
     
@@ -160,7 +159,7 @@ def dispayResults(results: str):
     
     '''
     questionNumber = 1
-    for t in results:
+    for t in results: # goes thrue the result array and check the question was right or wrong; then displays it to the user
         if t == "C":
             print (Fore.GREEN+"(+)",questionNumber,"",Fore.GREEN+"-------------------------------")
         elif t == "W":

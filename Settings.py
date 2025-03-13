@@ -2,6 +2,7 @@ import GUI
 from colorama import Fore, Back, Style # colors for the colsul
 from colorama import init
 init(autoreset=True) # automaticly reset the color after each line
+
 import sys
 import quastions
 
@@ -43,14 +44,14 @@ def QuizSelection() -> dict | int | int:
     HistoryQuestions = False
     timechange = False
     quastionchange = False
-    time = 5
+    time = 20
     NumberOfQuestions = 3
     Quiz = {}
     returnQuiz = {}
     while True:
         GUI.clearConsole()
         GUI.InputUI(2, 2, 1)
-        print("enter the letter Q and the number on which quiz you wish to add to the question pool")
+        print("enter the letter Q and the number on which quiz you wish to add to the question pool") # check which questions have been selected
         print("to add multipull add a comma between selection (e.g., Q1,2)")
         if MathQuestions == True:
             print(Fore.GREEN+ f"(1) Math Questions")
@@ -67,7 +68,7 @@ def QuizSelection() -> dict | int | int:
         else:
             print(Fore.BLACK+ f"(3) History Questions")
         print("-----------------------------")
-        if timechange == True:
+        if timechange == True: # checks what the defalt time is for the questions
             print(Fore.GREEN+ f"(S) edit time in seconds (e.g., S 40); its currently set to {time}s")
         else:
             print(Fore.BLACK+ f"(S) edit time in seconds (e.g., S 40); its currently set to {time}s")
@@ -85,14 +86,14 @@ def QuizSelection() -> dict | int | int:
         timechange = False
         quastionchange = False
         UserInput = input("Input: ")
-        if UserInput[0] == "Q" or UserInput[0] == "q":
+        if UserInput[0] == "Q" or UserInput[0] == "q": # if the uese wants to add questions sets
             try:
                 value = UserInput[1:]
                 MathQuestions = False
                 ComputerSceinceQuestions = False
                 HistoryQuestions = False
                 Quiz = {}
-                for i in value.split(","):
+                for i in value.split(","): # the check to see if multipull questions sets shuld be added
                     if i == "1" or i == " 1":
                         MathQuestions = True
                         Quiz = Quiz | quastions.mathQuastion().copy()
@@ -109,19 +110,19 @@ def QuizSelection() -> dict | int | int:
                 GUI.error(f"ERROR: input of 'Q' function was not readable; EXAMPLE Q 1,2")
                 pass
 
-        elif UserInput[0] == "N" or UserInput[0] == "n":
+        elif UserInput[0] == "N" or UserInput[0] == "n": # if the user wants to chege the number of questions
             value = UserInput[1:]
             try:
                 if int(value) >= 1 and int(value) <= Quiz.__len__():
                     NumberOfQuestions = int(value)
                     quastionchange = True
-                else:
+                else: # fails if the number is not between 0 and #
                     GUI.error(f"ERROR: input of 'N' function was not revicing a valid input; expected number between 1 and {Quiz.__len__()}; recived {value}; EXAMPLE N 9")
-            except:
+            except: # fails if the user didnt give a good answer
                 GUI.error(f"ERROR: input of 'N' function was not readable; EXAMPLE N 9")
                 pass
 
-        elif UserInput[0] == "S" or UserInput[0] == "s":
+        elif UserInput[0] == "S" or UserInput[0] == "s": # changes the ammout of time in secons
             try:
                 value = UserInput[1:]
                 if int(value) >= 0:
@@ -132,12 +133,13 @@ def QuizSelection() -> dict | int | int:
             except:
                 pass
                 GUI.error(f"ERROR: input of 'S' function was not readable; EXAMPLE S 20")
-        elif UserInput == "EXIT" or UserInput == "0":
+
+        elif UserInput == "EXIT" or UserInput == "0": # exiting the code
             GUI.clearConsole()
             sys.exit()
-        elif UserInput == "NEXT" or UserInput == "next" or UserInput == "1":
+        elif UserInput == "NEXT" or UserInput == "next" or UserInput == "1": # gowing to the next section of code
             GUI.clearConsole()
-            if returnQuiz.__len__() != 0 and int(NumberOfQuestions) >= 0 and int(NumberOfQuestions) <= Quiz.__len__() and time >= 0:
+            if returnQuiz.__len__() != 0 and int(NumberOfQuestions) >= 0 and int(NumberOfQuestions) <= Quiz.__len__() and time >= 0: # check if everything is right
                 return returnQuiz, NumberOfQuestions, time
         else:
             GUI.error(f"value {UserInput} is not recognised")
@@ -175,7 +177,7 @@ def Selection() -> int:
         print("to exit the porgram type (EXIT) or (0)")
         GUI.InputUI(1, 2, 2)
         UserInput = input("Input: ")
-        if UserInput == "1":
+        if UserInput == "1": # chekcing if the user input is right
             return 1
         if UserInput == "2":
             return 2
@@ -214,7 +216,7 @@ def SaveSelection() -> int:
     print("--------------------------------------")
     while True:
         UserInput = input("Input: ")
-        if UserInput == "1":
+        if UserInput == "1": # chekcing if the user input is right
             return 1
         if UserInput == "2":
             return 2
@@ -224,21 +226,25 @@ def SaveSelection() -> int:
 
 def pastResultSelection(Results: str)-> int:
     GUI.clearConsole()
-    if Results.__len__() == 0:
+    if Results.__len__() == 0: # if there are 0 results; then exits the code
         GUI.error("No results found")
-        return 0
+        return "NORESULTFOUND"
+    if Results.__len__() == 1: # if there is 1 result; auto selece that result
+        return(1)
     while True:
         number = 0
         GUI.clearConsole()
         GUI.InputUI(2, 2, 1)
-        print(" Hear are the resuts from your quorry")
+        print("Hear are the resuts from your quorry") # asks the user which result the user wants to see
+        print("the bigger the index is the more in the present that question was compleated")
         for i in Results:
             number += 1
             print(f"{number}: {i}")
         GUI.InputUI(2, 2, 2)
         UserInput = input(f"put in which result you wish to check between 1 and {Results.__len__()}: ")
         try:
-            if int(UserInput) >= 1 and int(UserInput) <= Results.__len__():
+            if int(UserInput) >= 1 and int(UserInput) <= Results.__len__(): # validate that result is right
                 return int(UserInput)
         except:
+            GUI.error(f"expected a number between 1 and {Results.__len__()}; recived {UserInput}")
             pass

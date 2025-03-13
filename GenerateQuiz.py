@@ -34,10 +34,10 @@ def randomQuastions(Quiz: dict) -> dict | str | str | str:
     '''
     PossibleAnswer = []
 
-    quastionNumber = random.randint(1, Quiz.__len__())
+    quastionNumber = random.randint(1, Quiz.__len__()) # grabs a random question from the question set
     QuastionsSet = Quiz[quastionNumber]
 
-    Quastions = QuastionsSet["Quastion"]
+    Quastions = QuastionsSet["Quastion"] # saves it inside of an array
     PossibleAnswer.append(QuastionsSet["A"])
     PossibleAnswer.append(QuastionsSet["B"])
     PossibleAnswer.append(QuastionsSet["C"])
@@ -93,29 +93,29 @@ def runQuiz(Quiz: dict, total: int, time: int) -> str:
     Results = []
     Values = ["A","B","C","D"]
     nextQuestion = True
-    while i != total:
+    while i != total: # loops untill all quesitons are right
         GUI.clearConsole()
 
-        if nextQuestion == True:
+        if nextQuestion == True: # checks if it can go to the next question
             Quiz, Quastions, PossibleAnswer, Answer = randomQuastions(Quiz)
         nextQuestion = False
 
         GUI.InputUI(i+1, total, 1)
         print(f"Question: {Quastions}")
         f = 0
-        for z in PossibleAnswer:
+        for z in PossibleAnswer: # printing the possible ancers to the quetion
             print (f"{Values[f]}: {z}")
             f+=1
         GUI.InputUI(i+1, total, 2)
         output, time = GUI.input(time, Values)
 
 
-        posresult = False
+        posresult = False # checks if the valuse is A; B; C; D only
         for t in Values:
             if output == t:
                 posresult = True
 
-        if output == Answer:
+        if output == Answer: # checks if the result is right wrong or ran out on time
             Results.append("C")
             nextQuestion = True
             i+=1
